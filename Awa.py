@@ -1,93 +1,79 @@
 import streamlit as st
 
-# ------------------ Données du CV ------------------ #
-fonction = "GEOMATICIEN"
-nom = "Mame Awa Ndour"
-adresse = "Thiaroye "
-email = "ndour1662@gmail.com"
-
-objectif = (
-    "Étudiant en 2eme année en géomatique au Centre d'Entreprenariat et de "
-    "Développement Technique, je souhaite mettre en pratique mes compétences "
-    "et engranger de l'expérience au près de votre entreprise."
+# Configuration de la page
+st.set_page_config(
+    page_title="Mon Portfolio",
+    page_icon="💼",
+    layout="wide"
 )
 
-diplomes = [
-    "Technicien Supérieur en géomatique – CEDT le G15 – 2026",
-    "Baccalauréat – Lycée de mbao – 2021",
-    "BFEM – Lycée de Bokhol  – 2019"
-]
+# Barre latérale
+st.sidebar.title("Navigation")
+page = st.sidebar.radio("Aller vers :", ["Accueil", "À propos", "Projets", "Compétences", "Contact"])
 
-competences = [
-    "Capacité à manipuler PostgreSQL, WampServer pour la création de bases de données",
-    "Connaissance en Système d’Information Géographique",
-    "Confection de cartes sur QGIS et ArcGIS",
-    "Confection de plans 2D avec AutoCAD et 3D avec SketchUp",
-    "Collecte de données avec drone",
-    "Collecte de données avec téléphone (Mobile Topographer, QField, Locus GIS, MGRS UTM GPS, UTM GEO MAP)",
-    "Collecte de données avec Station Totale Robotisée et GPS différentiel",
-    "Capacité à piloter un drone",
-    "Traitement d'images de drone avec Agisoft Metashape, PIX4D Mapper, Global Mapper",
-    "Connaissance en webmapping (HTML)",
-    "Connaissance en télédétection",
-    "Traitement d'images satellitaires avec Erdas Imagine et ENVI",
-    "Maîtrise des logiciels bureautiques : Word, Excel, PowerPoint, Access"
-]
+# Page Accueil
+if page == "Accueil":
+    st.title("👋 Bienvenue sur mon Portfolio")
+    st.write("Je suis **Ndour Awa**, passionnée par la technologie et l'innovation.")
+    st.image("https://via.placeholder.com/800x300", use_container_width=True)
+    st.markdown("### 🚀 Objectif")
+    st.write("Créer des solutions innovantes adaptées aux besoins des entreprises.")
 
-langues = [
-    "Français : bonne maîtrise",
-    "Anglais : maîtrise moyenne"
-]
+# Page À propos
+elif page == "À propos":
+    st.title("🙋‍♀️ À propos de moi")
+    st.write("""
+    Je suis spécialisée en :
+    - 🌍 Géomatique
+    - 📊 Analyse de données
+    - 💻 Développement web
+    """)
+    st.info("Disponible pour des stages et collaborations.")
 
+# Page Projets
+elif page == "Projets":
+    st.title("📂 Mes Projets")
 
+    col1, col2 = st.columns(2)
 
-# ------------------ Interface Streamlit ------------------ #
+    with col1:
+        st.subheader("Projet 1")
+        st.write("Application d'analyse spatiale avec Python.")
+        st.button("Voir plus")
 
-st.set_page_config(page_title="CV", page_icon="📄", layout="wide")
+    with col2:
+        st.subheader("Projet 2")
+        st.write("Dashboard interactif avec Streamlit.")
+        st.button("Voir plus")
 
-# En-tête
-st.title("Mame Awa Ndour")
-st.header(fonction)
-st.subheader("Ndour")
+# Page Compétences
+elif page == "Compétences":
+    st.title("🛠 Compétences")
 
-col1, col2, col3 , col4 = st.columns(4)
-with col1:
-    st.markdown(f"Nom : {nom}")
-with col2:
-    st.markdown(f"Adresse : {adresse}")
-with col3:
-    
-with col4:
-    st.markdown(f"Email : {email}")
+    st.write("### Programmation")
+    st.progress(85)
+    st.write("Python")
 
-st.markdown("---")
+    st.write("### Analyse de données")
+    st.progress(75)
+    st.write("Pandas, NumPy")
 
-# Objectif
-st.header("Objectif professionnel")
-st.write(objectif)
+    st.write("### SIG")
+    st.progress(80)
+    st.write("QGIS, ArcGIS")
 
-# Diplômes
-st.header("Diplômes et études")
-for d in diplomes:
-    st.markdown(f"- {d}")
+# Page Contact
+elif page == "Contact":
+    st.title("📩 Contact")
 
-# Compétences
-st.header("Compétences")
-for c in competences:
-    st.markdown(f"- {c}")
+    with st.form("contact_form"):
+        nom = st.text_input("Votre nom")
+        email = st.text_input("Votre email")
+        message = st.text_area("Votre message")
+        submit = st.form_submit_button("Envoyer")
 
-# Langues et divers en colonnes
-col_lang, col_div = st.columns(2)
+        if submit:
+            st.success("Message envoyé avec succès !")
 
-with col_lang:
-    st.header("Langues")
-    for l in langues:
-        st.markdown(f"- {l}")
-
-with col_div:
-    st.header("Divers")
-    for d in divers:
-        st.markdown(f"- {d}")
-
-
-    st.markdown(f"- {l}")
+    st.write("📧 Email : awa.ndour@email.com")
+    st.write("🌍 Localisation : Dakar, Sénégal")
